@@ -46,6 +46,16 @@ public class MemberDAO {
 		 //sqlSessionFactory가 query 가동   ->  mapper.xml의 select문을 통해 실행된 결과가 selectList로 전부 출력된다. 
 	}
 	
+	public static String findid(MemberVO vo) {
+		
+		return sqlSessionFactory1.openSession().selectOne("findid", vo);
+	}
+	
+	public static String findpw(MemberVO vo) {
+		
+		return sqlSessionFactory1.openSession().selectOne("findpw", vo);
+	}
+	
 
 	public static MemberVO login(MemberVO vo) {
 	
