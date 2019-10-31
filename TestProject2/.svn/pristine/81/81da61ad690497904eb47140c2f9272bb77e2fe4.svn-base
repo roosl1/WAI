@@ -1,0 +1,7 @@
+@charset "EUC-KR";
+ #all-container {
+        width: 1000px;
+        margin: 0px auto;
+        padding: 20px;
+        border: 1px solid #bcbcbc;
+      }
