@@ -22,6 +22,19 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
   
+   	function makeid() {
+   		
+   		var regexp =  /^[A-Za-z+]{1,}[0-9+]{1,}$/	
+
+   			if( !regexp.test(signup.id.value) ) {
+   				document.getElementById('id').innerHTML="아이디는 영문+숫자 조합으로 입력해주세요."
+   				return false;
+   			} else {
+   				document.getElementById('id').innerHTML=""
+   				return false;
+   			}
+   	}
+  
     function sample3_execDaumPostcode() {
       
         new daum.Postcode({
@@ -82,15 +95,6 @@
 var idchk = 0;
 
 function idchker() {
-	
-	var regexp =  /^[A-Za-z+]{1,}[0-9+]{1,}$/	
-
-		if( !regexp.test(signup.id.value) ) {
-
-			alert("아이디는 영문+숫자 조합으로 입력해주세요.");
-			signup.id.value = "";
-			return false;
-		}
 	
  	var id = signup.id.value;
  	var id2 = { id: id };
@@ -216,12 +220,10 @@ function memberchk() {
 <hr>
 
 이름 : <input type="text" name="name" value="${ name }" readonly> <br>
-아이디 : <input type="text" id="id" name="id" onkeyup="makeid()"> <input type="button" name="idchk" value="아이디 중복확인" onclick="idchker()" >  <br>
-
-
+아이디 : <input type="text" name="id" onkeyup="makeid()"> <input type="button" name="idchk" value="아이디 중복확인" onclick="idchker()" >  <a id="id"></a> <br>
 비밀번호 : <input type="password" name="pw" onkeyup="makepw()"> <br>
 비밀번호 확인 : <input type="password" name="pwchk"> <br>
-핸드폰 번호 : <input type="text" name="hp1"> - <input type="text" name="hp2"> - <input type="text" name="hp3"> <br>
+핸드폰 번호 : <input type="text" name="hp1" maxlength="3"> - <input type="text" name="hp2" maxlength="4"> - <input type="text" name="hp3" maxlength="4"> <br>
 주소 : <br>
 <input type="text" name="ad1" id="sample3_postcode" placeholder="우편번호">
 <input type="button" onclick="sample3_execDaumPostcode()" value="우편번호 찾기"><br>

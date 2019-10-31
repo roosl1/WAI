@@ -229,6 +229,87 @@ public class HomeController {
 	} 
 	 
 	 
+	 @RequestMapping(value = "/findid", method = RequestMethod.GET)
+		public ModelAndView findid(ModelAndView mv) {
+				
+			mv.setViewName("findid");
+			
+			return mv;
+		}
+			
+
+		 @RequestMapping(value = "/dofindid" , method = RequestMethod.POST , produces="application/json")
+		    public @ResponseBody Map<String,Object> dofindid(@RequestBody Map<String, Object> params) {
+			 
+			 String name = (String) params.get("name");
+			 String r_num1 = (String) params.get("rnum1");
+			 String r_num2 = (String) params.get("rnum2");
+			 
+
+			 System.out.println(name);
+			 System.out.println(r_num1+"-"+r_num2);
+			 
+			 MemberVO vo = new MemberVO();
+			 vo.setName(name);
+			 vo.setR_num1(r_num1);
+			 vo.setR_num2(r_num2);
+			 
+			 Map <String,Object> map1 = new HashMap <String,Object>();
+			 
+			 String rs = MemberDAO.findid(vo);
+			 
+			 map1.put("rs", rs);
+			 
+		     return  map1;
+		    }
+		 
+		 @RequestMapping(value = "/dofindpw" , method = RequestMethod.POST , produces="application/json")
+		    public @ResponseBody Map<String,Object> dofindpw(@RequestBody Map<String, Object> params) {
+			 
+			 String id = (String) params.get("id");
+			 String name = (String) params.get("name");
+
+			 System.out.println(id);
+			 System.out.println(name);
+			 
+			 MemberVO vo = new MemberVO();
+			 vo.setId(id);
+			 vo.setName(name);
+			 
+			 Map <String,Object> map1 = new HashMap <String,Object>();
+			 
+			 String rs = MemberDAO.findpw(vo);
+			 
+			 map1.put("rs", rs);
+			 
+		     return  map1;
+		    }
+		  
+		
+		
+		@RequestMapping(value = "/findpw", method = RequestMethod.GET)
+		public ModelAndView findpw(ModelAndView mv) {
+				
+			mv.setViewName("findpw");
+			
+			return mv;
+		}
+		
+		
+		@RequestMapping(value = "/gologin", method = RequestMethod.GET)
+		public ModelAndView gologin2(ModelAndView mv) {
+			
+			mv.setViewName("login");
+			return mv;
+		}
+		
+		@RequestMapping(value = "/gofindpw", method = RequestMethod.GET)
+		public ModelAndView gofindpw(ModelAndView mv) {
+			mv.setViewName("findpw");
+			return mv;
+		} 
+	
+	 
 	 @RequestMapping(value = "/login", method = RequestMethod.POST)
 		public ModelAndView login(HttpServletRequest req, ModelAndView mv) {
 			
@@ -410,10 +491,10 @@ public class HomeController {
 			}
 	 
 		 
-			@RequestMapping(value = "/gologin", method = RequestMethod.GET)
-			public String gologin() {
-				
-				return "login";
+			@RequestMapping(value = "/gologin", method = RequestMethod.POST)
+			public ModelAndView gologin(ModelAndView mv) {
+				mv.setViewName("login");
+				return mv;
 			}
 			
 			

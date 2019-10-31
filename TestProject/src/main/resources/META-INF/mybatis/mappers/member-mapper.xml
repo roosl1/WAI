@@ -38,6 +38,24 @@
 	
 	</select>
   
+  	<select id="findid" resultType="String" parameterType="member"> 
+	
+	SELECT id
+	FROM login
+	WHERE name=#{name} and r_num1=#{r_num1} and r_num2=#{r_num2}
+	
+	</select>
+	
+		
+	<select id="findpw" resultType="String" parameterType="member"> 
+	
+	SELECT pw
+	FROM login
+	WHERE name=#{name} and id=#{id}
+	
+	</select>
+  
+  
     <insert id="signup" parameterType="member">
 	
 	INSERT INTO login (name,id,pw,hp1,hp2,hp3,ad1,ad2,ad3,email,r_num1,r_num2,m_date,gender,admin,grade)
