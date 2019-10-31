@@ -103,7 +103,12 @@ function getCookie(cookieName) {
 <input type="button" value="회원가입" onclick="signup()">
 
 
-<input type="checkbox" checked="checked" id="idSaveCheck" name="remember"> ID 기억하기
+<input type="checkbox" checked="checked" id="idSaveCheck" name="remember"> ID 기억하기 <br>
+
+<a href="findid"><input type="button" value="아이디 찾기"></a>
+<a href="findpw"><input type="button" value="비밀번호 찾기"></a>
+
+
 
 </form>
 
