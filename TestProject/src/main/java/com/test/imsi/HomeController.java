@@ -327,8 +327,10 @@ public class HomeController {
 		      {      
 		         vo = MemberDAO.login(vo);
 		         mv.addObject("mvo", vo);
+		         
 		         HttpSession Session = req.getSession(true);
 		         Session.setAttribute("loginid",id);
+		         Session.setAttribute("vo", vo);
 		         
 		         if (vo.getAdmin().equals("0")) 
 		         {   
@@ -498,10 +500,17 @@ public class HomeController {
 			}
 			
 			
-			@RequestMapping(value = "/goshop", method = RequestMethod.GET)
-			public String goshop() {
+			@RequestMapping(value = "/goshop", method = RequestMethod.POST)
+			public ModelAndView goshop(ModelAndView mv) {
 				
-				return "User_Main";
+				
+				List <ProductVO> list = ProductDAO.mainProductList("상의");
+				
+				mv.addObject("mlist", list);
+				mv.setViewName("User_Main");
+				
+				
+				return mv;
 			}
 			//내 정보 보기에서 쇼핑하러 가기
 			 
@@ -1349,10 +1358,21 @@ public class HomeController {
 				
 		@RequestMapping(value = "/goreviewinsert" , method = RequestMethod.GET)
 		public ModelAndView goreviewinsert(ModelAndView mv,HttpServletRequest req)
-		{		
-			String productcode = req.getParameter("productcode");
-		    mv.addObject("productcode",productcode);
-		    mv.setViewName("reviewinsert");
+		{	
+		      HttpSession Session = req.getSession();
+		      
+		      String loginid = (String) Session.getAttribute("loginid");
+		      
+		      if(loginid!=null) {
+		    	  System.out.println(loginid);
+		    		String productcode = req.getParameter("productcode");
+				    mv.addObject("productcode",productcode);
+				    mv.setViewName("reviewinsert");
+		      } else {
+		    	  
+		    	  mv.setViewName("login");
+		    	  
+		      }
 			
 			return mv;
 		}
